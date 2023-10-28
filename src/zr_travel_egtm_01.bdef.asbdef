@@ -1,0 +1,52 @@
+managed implementation in class ZBP_R_TRAVEL_EGTM_01 unique;
+strict ( 2 );
+with draft;
+
+define behavior for ZR_TRAVEL_EGTM_01 alias Travel_Gen
+persistent table ztravel_egtm_01
+draft table ZTRAVEL_EGTM_01D
+etag master LocalLastChangedAt
+lock master total etag LocalLastChanged
+authorization master( global )
+
+{
+  field ( readonly )
+   Mykey,
+   LocalLastChanged,
+   LocalLastChangedAt;
+
+  field ( numbering : managed )
+   Mykey;
+
+
+  create;
+  update;
+  delete;
+
+  draft action Edit;
+  draft action Activate optimized;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
+
+  mapping for ZTRAVEL_EGTM_01
+  {
+    Mykey = mykey;
+    TravelID = travel_id;
+    AgencyID = agency_id;
+    CustomerID = customer_id;
+    BeginDate = begin_date;
+    EndDate = end_date;
+    BookingFee = booking_fee;
+    TotalPrice = total_price;
+    CurrencyCode = currency_code;
+    Description = description;
+    OverallStatus = overall_status;
+    CreatedBy = created_by;
+    CreatedAt = created_at;
+    LastChangedBy = last_changed_by;
+    LastChangedAt = last_changed_at;
+    LocalLastChanged = local_last_changed;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}
